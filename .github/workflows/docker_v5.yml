@@ -20,5 +20,11 @@ jobs:
       with:
        username: ${{ secrets.DOCKERHUB_USERNAME  }}
        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      
+    - name: build and push container to Docker Hub
+      uses: docker/build-push-action@v2
+      with:
+        context: ./
+        file: ./Dockerfile
+        push: true
+        tags: jankratochvil/huggingface-fastapi:latest
